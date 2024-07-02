@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexaria</title>
+    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="welcome-screen" class="screen">
+        <h1>Welcome to Hexaria</h1>
+        <div id="game-instructions"></div>
+        <div id="player-setup">
+            <input type="text" id="player1-name" placeholder="Player 1 Name">
+            <select id="opponent-type">
+                <option value="player">Player 2</option>
+                <option value="bot">Bot</option>
+            </select>
+            <input type="text" id="player2-name" placeholder="Player 2 Name">
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button id="start-game" disabled>Play Game</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen" style="display: none;">
+        <h1>Hexaria</h1>
+        <div id="game-info">
+            <div id="player1-info">
+                <span id="player1-name-display"></span>
+                <span id="player1-score">Score: 0</span>
+            </div>
+            <div id="player2-info">
+                <span id="player2-name-display"></span>
+                <span id="player2-score">Score: 0</span>
+            </div>
+            <div id="current-hexagon"></div>
+        </div>
+        <div id="game-board"></div>
+        <button id="new-game">New Game</button>
+    </div>
+
+    <div id="game-over-screen" class="screen" style="display: none;">
+        <h2>Game Over</h2>
+        <div id="winner-info"></div>
+        <button id="restart-game">Restart</button>
+    </div>
+
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <div id="sort-options">
+            <button id="sort-score">Sort by Score</button>
+            <button id="sort-date">Sort by Date</button>
+        </div>
+        <ul id="leaderboard-list"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #aaaaaa;
+}
+
+.screen {
+    text-align: center;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    margin: 20px auto;
+}
+
+.hexagon {
+    width: 60px;
+    height: 70px;
+    background-color: #fff;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hexagon:hover {
+    transform: scale(1.1);
+}
+
+.hexagon.disabled {
+    background-color: #000000;
+    cursor: not-allowed;
+}
+
+.hexagon.red {
+    background-color: #ff6b6b;
+}
+
+.hexagon.blue {
+    background-color: skyblue;
+}
+
+#current-hexagon {
+    width: 60px;
+    height: 70px;
+    margin: 20px auto;
+}
+
+#leaderboard {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#leaderboard-list li {
+    margin-bottom: 10px;
+}
