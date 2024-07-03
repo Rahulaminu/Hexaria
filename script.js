@@ -22,6 +22,7 @@ const startGameButton = document.getElementById('start-game');
 const newGameButton = document.getElementById('new-game');
 const restartGameButton = document.getElementById('restart-game');
 
+
 // Event listeners
 startGameButton.addEventListener('click', startGame);
 newGameButton.addEventListener('click', resetGame);
@@ -61,7 +62,7 @@ function startGame() {
     initializeBoard();
     updateScoreDisplay();
     generateCurrentHexagon();
-    // addHoverEffects();
+    addHoverEffects();
 
     welcomeScreen.style.display = 'none';
     gameScreen.style.display = 'block';
@@ -119,6 +120,10 @@ function placeHexagon(row, col) {
         return;
     }
 
+    // remove hover effect
+    hidePreview(hexagon);
+    resetAdjacentPreviews();
+
     hexagon.value = gameState.currentHexagon.value;
     hexagon.color = gameState.currentHexagon.color;
     hexagon.element.textContent = hexagon.value;
@@ -160,6 +165,9 @@ function checkAdjacentHexagons(row, col) {
             const adjacent = gameState.board[index];
 
             if (adjacent.value !== null && !adjacent.disabled) {
+                // remove any preview classes
+                // adjacent.element.classList.remove('preview-add', 'preview-takeover');
+
                 if (adjacent.color !== gameState.currentHexagon.color && adjacent.value < gameState.currentHexagon.value) {
                     // Takeover
                     adjacent.color = gameState.currentHexagon.color;
@@ -311,12 +319,44 @@ function hidePreview(hexagon) {
 }
 
 function previewAdjacentHexagons(row, col) {
-    // Similar to checkAdjacentHexagons, but only show visual previews
-    // Implement the preview logic here
+    const directions = [
+        [-1, 0], [1, 0], [0, -1], [0, 1],
+        [row % 2 === 0 ? -1 : 1, -1],
+        [row % 2 === 0 ? -1 : 1, 1]
+    ];
+
+    directions.forEach(([dx, dy]) => {
+        const newRow = row + dx;
+        const newCol = col + dy;
+
+        if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 10) {
+            const index = newRow * 10 + newCol;
+            const adjacent = gameState.board[index];
+
+            if (adjacent && !adjacent.disabled && adjacent.value !== null) {
+                if (adjacent.color !== gameState.currentHexagon.color && adjacent.value < gameState.currentHexagon.value) {
+                    // Show takeover preview
+                    adjacent.element.classList.add('preview-takeover');
+                    adjacent.element.textContent = gameState.players[gameState.currentPlayer].color;
+                    // adjacent.element.textContent = adjacent.element.textContent = adjacent.value
+                    
+                } else if (adjacent.color === gameState.currentHexagon.color) {
+                    // Show addition preview
+                    adjacent.element.classList.add('preview-add');
+                    adjacent.element.textContent = adjacent.value + 1;
+                }
+            }
+        }
+    });
 }
 
 function resetAdjacentPreviews() {
-    // Reset all preview effects on adjacent hexagons
+    gameState.board.forEach(hexagon => {
+        if (!hexagon.disabled && hexagon.value !== null) {
+            hexagon.element.textContent = hexagon.value;
+            hexagon.element.classList.remove('preview-add', 'preview-takeover');
+        }
+    });
 }// Call addHoverEffects after initializing the board
 
 function botMove() {
