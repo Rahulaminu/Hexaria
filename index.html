@@ -29,18 +29,20 @@
 
     <div id="game-screen" class="screen" style="display: none;">
         <h1>Hexaria</h1>
+        <div id="game-board"></div>
         <div id="game-info">
-            <div id="player1-info">
-                <span id="player1-name-display"></span>
-                <span id="player1-score">Score: 0</span>
-            </div>
-            <div id="player2-info">
-                <span id="player2-name-display"></span>
-                <span id="player2-score">Score: 0</span>
+            <div class="player-info">
+                <div id="player1-info">
+                    <p id="player1-name">Player 1</p><span id="player1-name-display"></span>
+                    <span id="player1-score">Score: 0</span>
+                </div>
+                <div id="player2-info">
+                    <p id="player2-name">Player 2</p><span id="player2-name-display"></span>
+                    <span id="player2-score">Score: 0</span>
+                </div>
             </div>
             <div id="current-hexagon"></div>
         </div>
-        <div id="game-board"></div>
         <button id="new-game">New Game</button>
     </div>
 

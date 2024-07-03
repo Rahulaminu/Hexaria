@@ -19,6 +19,13 @@ body {
     margin: 20px auto;
 }
 
+#game-info {
+    display: flex;
+}
+
+.player-info {
+}
+
 .hexagon {
     width: 60px;
     height: 70px;

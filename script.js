@@ -153,7 +153,9 @@ function checkAdjacentHexagons(row, col) {
     const directions = [
         [-1, 0], [1, 0], [0, -1], [0, 1],
         [row % 2 === 0 ? -1 : 1, -1],
-        [row % 2 === 0 ? -1 : 1, 1]
+        [row % 2 === 0 ? -1 : 1, 1],
+        [row % 2 === 1 ? -1 : 1, -1],
+        [row % 2 === 1 ? -1 : 1, 1],
     ];
 
     for (const [dx, dy] of directions) {
@@ -322,7 +324,9 @@ function previewAdjacentHexagons(row, col) {
     const directions = [
         [-1, 0], [1, 0], [0, -1], [0, 1],
         [row % 2 === 0 ? -1 : 1, -1],
-        [row % 2 === 0 ? -1 : 1, 1]
+        [row % 2 === 0 ? -1 : 1, 1],
+        [row % 2 === 1 ? -1 : 1, -1],
+        [row % 2 === 1 ? -1 : 1, 1],
     ];
 
     directions.forEach(([dx, dy]) => {
@@ -338,7 +342,6 @@ function previewAdjacentHexagons(row, col) {
                     // Show takeover preview
                     adjacent.element.classList.add('preview-takeover');
                     adjacent.element.textContent = gameState.players[gameState.currentPlayer].color;
-                    // adjacent.element.textContent = adjacent.element.textContent = adjacent.value
                     
                 } else if (adjacent.color === gameState.currentHexagon.color) {
                     // Show addition preview
