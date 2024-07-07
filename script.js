@@ -21,6 +21,8 @@ const difficultySelect = document.getElementById('difficulty');
 const startGameButton = document.getElementById('start-game');
 const newGameButton = document.getElementById('new-game');
 const restartGameButton = document.getElementById('restart-game');
+const player1ColorDisplay = document.getElementById('player1-color');
+const player2ColorDisplay = document.getElementById('player2-color');
 
 
 // Event listeners
@@ -66,6 +68,7 @@ function startGame() {
 
     welcomeScreen.style.display = 'none';
     gameScreen.style.display = 'block';
+    document.getElementById('leaderboard').style.display = 'block'; // Show leaderboard
 }
 
 function initializeBoard() {
@@ -149,7 +152,7 @@ function placeHexagon(row, col) {
     }
 }
 
-function checkAdjacentHexagons(row, col) {
+function checkAdjacentHexagons(row, col) {  
     const directions = [
         [-1, 0], [1, 0], [0, -1], [0, 1],
         [row % 2 === 0 ? -1 : 1, -1],
@@ -205,6 +208,10 @@ function updateScoreDisplay() {
     document.getElementById('player2-name-display').textContent = gameState.players[1].name;
     document.getElementById('player1-score').textContent = `Score: ${gameState.players[0].score}`;
     document.getElementById('player2-score').textContent = `Score: ${gameState.players[1].score}`;
+    
+    // Update player color indicators
+    player1ColorDisplay.style.backgroundColor = gameState.players[0].color;
+    player2ColorDisplay.style.backgroundColor = gameState.players[1].color;
 }
 
 function checkGameOver() {
@@ -233,11 +240,11 @@ function updateLeaderboard(winner) {
     displayLeaderboard();
 }
 
-function displayLeaderboard() {
-    const leaderboard = JSON.parse(localStorage.getItem('hexariaLeaderboard')) || [];
+function displayLeaderboard(leaderboard) {
+    const leaderboardData = leaderboard || JSON.parse(localStorage.getItem('hexariaLeaderboard')) || [];
     const leaderboardList = document.getElementById('leaderboard-list');
     leaderboardList.innerHTML = '';
-    leaderboard.forEach((entry, index) => {
+    leaderboardData.forEach((entry, index) => {
         const li = document.createElement('li');
         li.textContent = `${index + 1}. ${entry.name}: ${entry.score} (${new Date(entry.date).toLocaleDateString()})`;
         leaderboardList.appendChild(li);

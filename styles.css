@@ -5,25 +5,60 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #aaaaaa;
+    background-color: #242424;
+    color: #ffffff;
+    flex-direction: column;
 }
 
 .screen {
     text-align: center;
+    width: 100%;
+}
+
+#game-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* margin: 20px auto */
+    margin-left: 350px;
 }
 
 #game-board {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 5px;
-    margin: 20px auto;
+    margin-right: 100px;
+}
+
+#leaderboard {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
 }
 
 #game-info {
     display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .player-info {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+#player2-info {
+    margin-left: 30px;
+}
+
+.player-color {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-left: 10px;
+    border-radius: 50%;
 }
 
 .hexagon {
@@ -39,12 +74,25 @@ body {
     transition: all 0.3s ease;
 }
 
+.current-hexagon-info {
+    display: flex;
+    align-items: center;
+}
+
+.current-hexagon-info-title {
+    margin-right: 20px;
+}
+
+#current-hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
 .hexagon:hover {
     transform: scale(1.1);
 }
 
 .hexagon.disabled {
-    background-color: #000000;
+    background-color: #7e7e7e;
     cursor: not-allowed;
 }
 
@@ -60,16 +108,6 @@ body {
     width: 60px;
     height: 70px;
     margin: 20px auto;
-}
-
-#leaderboard {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #leaderboard-list {
